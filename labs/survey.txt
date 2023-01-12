@@ -1,1 +1,11 @@
-test
+Office Hour Preferences: Monday Mornings and Afternoons
+
+Values/Goals: I would like to have a career in AI/ML to help further healthcare and medical technologies.
+
+Inventory:
+1. Machine: Macbook Pro 14" (2021)
+2. Processor: M1 Pro, 8-core GPU, 14-core GPU, 16-core Neural Engine
+3. Year: 2021
+4. Operating System: MacOS Ventura 13.0.1
+5. Random Access Memory: 16 GB
+6. Non-volatile Memory; Remaining Space Available: 494.38 GB; 402.81 GB
