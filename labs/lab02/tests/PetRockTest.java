@@ -67,7 +67,7 @@ public class PetRockTest {
 
   @Test
   public void weightTest() throws Exception {
-    assertEquals(300.58, yan.getWeight(),0.00001);
+    assertEquals(300.58, yan.getWeight(),0.000001);
   }
 
   @Test
