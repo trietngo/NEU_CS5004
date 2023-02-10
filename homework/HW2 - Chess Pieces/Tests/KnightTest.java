@@ -16,7 +16,7 @@ public class KnightTest {
      * Setting up the main test object
      */
     @Before
-    public void knightSetup() {
+    public void knightSetup() throws IllegalArgumentException {
         knightTest = new Knight(4,5, Color.BLACK);
     }
 
@@ -26,7 +26,7 @@ public class KnightTest {
      */
     @Ignore ("knightSetup() error: Invalid position")
     @Test
-    public void knightSetupTestFail() {
+    public void knightSetupTestFail() throws IllegalArgumentException {
         knightTestInvalid = new Knight(8,6, Color.WHITE);
     }
 
@@ -59,7 +59,7 @@ public class KnightTest {
      * based on its current position
      */
     @Test
-    public void canMoveTest() {
+    public void canMoveTest() throws IllegalArgumentException {
         // Move 2 rows away
         assertEquals(1, knightTest.canMove(6,4));
         assertEquals(1, knightTest.canMove(2,6));
@@ -80,7 +80,7 @@ public class KnightTest {
      */
     @Ignore ("canMove() error: A piece cannot move to itself")
     @Test
-    public void canMoveInPlaceTestFail() {
+    public void canMoveInPlaceTestFail() throws IllegalArgumentException {
         assertEquals(1, knightTest.canMove(4,5));
     }
 
@@ -90,7 +90,7 @@ public class KnightTest {
      */
     @Ignore ("canMove() error: Out of bounds")
     @Test
-    public void canMoveOutOfBoundsTestFail() {
+    public void canMoveOutOfBoundsTestFail() throws IllegalArgumentException {
         assertEquals(1, knightTest.canMove(0,8));
     }
 
@@ -99,7 +99,7 @@ public class KnightTest {
      * another piece based on each piece's position
      */
     @Test
-    public void canKillTest() {
+    public void canKillTest() throws IllegalArgumentException {
         // Different color, wrong pos -> can't kill
         knightTestTarget = new Knight(5,0, Color.WHITE);
         assertEquals(0, knightTest.canKill(knightTestTarget));
@@ -122,7 +122,7 @@ public class KnightTest {
      */
     @Ignore ("canKill() error: Target Out of Bounds")
     @Test
-    public void canKillOutOfBoundsTestFail() {
+    public void canKillOutOfBoundsTestFail() throws IllegalArgumentException {
         knightTestTarget = new Knight(9,0, Color.WHITE);
         assertEquals(0, knightTest.canKill(knightTestTarget));
     }
@@ -133,7 +133,7 @@ public class KnightTest {
      */
     @Ignore ("canKill() error: Target cannot be at Self")
     @Test
-    public void canKillSelfTestFail() {
+    public void canKillSelfTestFail() throws IllegalArgumentException {
         knightTestTarget = new Knight(4,5, Color.WHITE);
         assertEquals(0, knightTest.canKill(knightTestTarget));
     }

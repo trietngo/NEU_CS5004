@@ -16,7 +16,7 @@ public class KingTest {
      * Setting up the main test object
      */
     @Before
-    public void kingSetup() {
+    public void kingSetup() throws IllegalArgumentException {
         kingTest = new King(4,0, Color.BLACK);
     }
 
@@ -26,7 +26,7 @@ public class KingTest {
      */
     @Ignore ("kingSetup() error: Invalid position")
     @Test
-    public void kingSetupTestFail() {
+    public void kingSetupTestFail() throws IllegalArgumentException {
         kingTestInvalid = new King(9,6, Color.WHITE);
     }
 
@@ -59,7 +59,7 @@ public class KingTest {
      * based on its current position
      */
     @Test
-    public void canMoveTest() {
+    public void canMoveTest() throws IllegalArgumentException {
         assertEquals(0, kingTest.canMove(6,0));
         assertEquals(1, kingTest.canMove(3,1));
     }
@@ -70,7 +70,7 @@ public class KingTest {
      */
     @Ignore ("canMove() error: A piece cannot move to itself")
     @Test
-    public void canMoveInPlaceTestFail() {
+    public void canMoveInPlaceTestFail() throws IllegalArgumentException {
         assertEquals(1, kingTest.canMove(4,0));
     }
 
@@ -80,7 +80,7 @@ public class KingTest {
      */
     @Ignore ("canMove() error: Out of bounds")
     @Test
-    public void canMoveOutOfBoundsTestFail() {
+    public void canMoveOutOfBoundsTestFail() throws IllegalArgumentException {
         assertEquals(1, kingTest.canMove(8,0));
     }
 
@@ -89,7 +89,7 @@ public class KingTest {
      * another piece based on each piece's position
      */
     @Test
-    public void canKillTest() {
+    public void canKillTest() throws IllegalArgumentException {
 
         // Different color, wrong pos -> can't kill
         kingTestTarget = new King(6,0, Color.WHITE);
@@ -111,7 +111,7 @@ public class KingTest {
      */
     @Ignore ("canKill() error: Target Out of Bounds")
     @Test
-    public void canKillOutOfBoundsTestFail() {
+    public void canKillOutOfBoundsTestFail() throws IllegalArgumentException {
         kingTestTarget = new King(9,0, Color.WHITE);
         assertEquals(0, kingTest.canKill(kingTestTarget));
     }
@@ -122,7 +122,7 @@ public class KingTest {
      */
     @Ignore ("canKill() error: Target cannot be Self")
     @Test
-    public void canKillSelfTestFail() {
+    public void canKillSelfTestFail() throws IllegalArgumentException {
         kingTestTarget = new King(4,0, Color.WHITE);
         assertEquals(0, kingTest.canKill(kingTestTarget));
     }

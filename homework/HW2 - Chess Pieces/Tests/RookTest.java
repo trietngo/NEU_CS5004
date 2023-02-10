@@ -16,7 +16,7 @@ public class RookTest {
      * Setting up the main test object
      */
     @Before
-    public void rookSetup() {
+    public void rookSetup() throws IllegalArgumentException {
         rookTest = new Rook(2,1, Color.BLACK);
     }
 
@@ -26,7 +26,7 @@ public class RookTest {
      */
     @Ignore ("rookSetup() error: Invalid position")
     @Test
-    public void rookSetupTestFail() {
+    public void rookSetupTestFail() throws IllegalArgumentException {
         rookTestInvalid = new Rook(1,-1, Color.WHITE);
     }
 
@@ -59,7 +59,7 @@ public class RookTest {
      * based on its current position
      */
     @Test
-    public void canMoveTest() {
+    public void canMoveTest() throws IllegalArgumentException {
         // Move horizontally
         assertEquals(1, rookTest.canMove(2,5));
         assertEquals(1, rookTest.canMove(2,0));
@@ -80,7 +80,7 @@ public class RookTest {
      */
     @Ignore ("canMove() error: A piece cannot move to itself")
     @Test
-    public void canMoveInPlaceTestFail() {
+    public void canMoveInPlaceTestFail() throws IllegalArgumentException {
         assertEquals(1, rookTest.canMove(2,1));
     }
 
@@ -90,7 +90,7 @@ public class RookTest {
      */
     @Ignore ("canMove() error: Out of bounds")
     @Test
-    public void canMoveOutOfBoundsTestFail() {
+    public void canMoveOutOfBoundsTestFail() throws IllegalArgumentException {
         assertEquals(1, rookTest.canMove(9,-8));
     }
 
@@ -99,7 +99,7 @@ public class RookTest {
      * another piece based on each piece's position
      */
     @Test
-    public void canKillTest() {
+    public void canKillTest() throws IllegalArgumentException {
         // Different color, wrong pos -> can't kill
         rookTestTarget = new Rook(5,0, Color.WHITE);
         assertEquals(0, rookTest.canKill(rookTestTarget));
@@ -122,7 +122,7 @@ public class RookTest {
      */
     @Ignore ("canKill() error: Target Out of Bounds")
     @Test
-    public void canKillOutOfBoundsTestFail() {
+    public void canKillOutOfBoundsTestFail() throws IllegalArgumentException {
         rookTestTarget = new Rook(9,0, Color.WHITE);
         assertEquals(0, rookTest.canKill(rookTestTarget));
     }
@@ -133,7 +133,7 @@ public class RookTest {
      */
     @Ignore ("canKill() error: Target cannot be at Self")
     @Test
-    public void canKillSelfTestFail() {
+    public void canKillSelfTestFail() throws IllegalArgumentException {
         rookTestTarget = new Rook(2,1, Color.WHITE);
         assertEquals(0, rookTest.canKill(rookTestTarget));
     }

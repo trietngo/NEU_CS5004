@@ -16,7 +16,7 @@ public class BishopTest {
      * Setting up the main test object
      */
     @Before
-    public void bishopSetup() {
+    public void bishopSetup() throws IllegalArgumentException {
         bishopTest = new Bishop(2,5, Color.BLACK);
     }
 
@@ -26,7 +26,7 @@ public class BishopTest {
      */
     @Ignore ("bishopSetup() error: Invalid position")
     @Test
-    public void bishopSetupTestFail() {
+    public void bishopSetupTestFail() throws IllegalArgumentException {
         bishopTestInvalid = new Bishop(8,2, Color.WHITE);
     }
 
@@ -59,7 +59,7 @@ public class BishopTest {
      * based on its current position
      */
     @Test
-    public void canMoveTest() {
+    public void canMoveTest() throws IllegalArgumentException {
         // Move diagonally along SE-NW axis
         assertEquals(1, bishopTest.canMove(5,2));
 
@@ -83,7 +83,7 @@ public class BishopTest {
      */
     @Ignore ("canMove() error: A piece cannot move to itself")
     @Test
-    public void canMoveInPlaceTestFail() {
+    public void canMoveInPlaceTestFail() throws IllegalArgumentException {
         assertEquals(1, bishopTest.canMove(2,5));
     }
 
@@ -93,7 +93,7 @@ public class BishopTest {
      */
     @Ignore ("canMove() error: Out of bounds")
     @Test
-    public void canMoveOutOfBoundsTestFail() {
+    public void canMoveOutOfBoundsTestFail() throws IllegalArgumentException {
         assertEquals(1, bishopTest.canMove(9,8));
     }
 
@@ -102,7 +102,7 @@ public class BishopTest {
      * another piece based on each piece's position
      */
     @Test
-    public void canKillTest() {
+    public void canKillTest() throws IllegalArgumentException {
         // Different color, wrong pos -> can't kill
         bishopTestTarget = new Bishop(5,0, Color.WHITE);
         assertEquals(0, bishopTest.canKill(bishopTestTarget));
@@ -125,7 +125,7 @@ public class BishopTest {
      */
     @Ignore ("canKill() error: Target Out of Bounds")
     @Test
-    public void canKillOutOfBoundsTestFail() {
+    public void canKillOutOfBoundsTestFail() throws IllegalArgumentException {
         bishopTestTarget = new Bishop(8,8, Color.WHITE);
         assertEquals(0, bishopTest.canKill(bishopTestTarget));
     }
@@ -136,7 +136,7 @@ public class BishopTest {
      */
     @Ignore ("canKill() error: Target cannot be at Self")
     @Test
-    public void canKillSelfTestFail() {
+    public void canKillSelfTestFail() throws IllegalArgumentException {
         bishopTestTarget = new Bishop(2,5, Color.WHITE);
         assertEquals(0, bishopTest.canKill(bishopTestTarget));
     }

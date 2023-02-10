@@ -18,7 +18,7 @@ public class PawnTest {
      * Setting up the main test objects
      */
     @Before
-    public void pawnSetup() {
+    public void pawnSetup() throws IllegalArgumentException {
         pawnTestBlack = new Pawn(7,2, Color.BLACK);
         pawnTestWhite = new Pawn(0,3, Color.WHITE);
     }
@@ -29,7 +29,7 @@ public class PawnTest {
      */
     @Ignore ("pawnSetup() error: Invalid position")
     @Test
-    public void pawnSetupTestFail() {
+    public void pawnSetupTestFail() throws IllegalArgumentException {
         pawnTestInvalid = new Pawn(0,8, Color.WHITE);
     }
 
@@ -64,7 +64,7 @@ public class PawnTest {
      * based on its current position
      */
     @Test
-    public void canMoveTest() {
+    public void canMoveTest() throws IllegalArgumentException {
         // Black piece can move
         assertEquals(1, pawnTestBlack.canMove(6,2));
 
@@ -84,7 +84,7 @@ public class PawnTest {
      */
     @Ignore ("canMove() error: A piece cannot move to itself")
     @Test
-    public void canMoveInPlaceTestFail() {
+    public void canMoveInPlaceTestFail() throws IllegalArgumentException {
         assertEquals(1, pawnTestBlack.canMove(7,2));
         assertEquals(1, pawnTestWhite.canMove(0,3));
     }
@@ -95,7 +95,7 @@ public class PawnTest {
      */
     @Ignore ("canMove() error: Out of bounds")
     @Test
-    public void canMoveOutOfBoundsTestFail() {
+    public void canMoveOutOfBoundsTestFail() throws IllegalArgumentException {
         assertEquals(1, pawnTestBlack.canMove(8,2));
         assertEquals(1, pawnTestWhite.canMove(-1,3));
     }
@@ -105,7 +105,7 @@ public class PawnTest {
      * another piece based on each piece's position
      */
     @Test
-    public void canKillTest() {
+    public void canKillTest() throws IllegalArgumentException {
         // Different color, wrong pos -> can't kill
         pawnTestTarget = new Pawn(5,0, Color.WHITE);
         assertEquals(0, pawnTestBlack.canKill(pawnTestTarget));
@@ -137,7 +137,7 @@ public class PawnTest {
      */
     @Ignore ("canKill() error: Target Out of Bounds")
     @Test
-    public void canKillOutOfBoundsTestFail() {
+    public void canKillOutOfBoundsTestFail() throws IllegalArgumentException {
         pawnTestTarget = new Pawn(8,4, Color.BLACK);
         pawnTestEdgeWhite = new Pawn(7,3, Color.WHITE);
         assertEquals(0, pawnTestEdgeWhite.canKill(pawnTestTarget));
@@ -150,7 +150,7 @@ public class PawnTest {
      */
     @Ignore ("canKill() error: Target cannot be at Self")
     @Test
-    public void canKillSelfTestFail() {
+    public void canKillSelfTestFail() throws IllegalArgumentException {
         pawnTestTarget = new Pawn(7,2, Color.WHITE);
         assertEquals(0, pawnTestBlack.canKill(pawnTestTarget));
     }

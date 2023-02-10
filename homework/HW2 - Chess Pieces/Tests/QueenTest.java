@@ -16,7 +16,7 @@ public class QueenTest {
      * Setting up the main test object
      */
     @Before
-    public void queenSetup() {
+    public void queenSetup() throws IllegalArgumentException {
         queenTest = new Queen(4,3, Color.BLACK);
     }
 
@@ -26,7 +26,7 @@ public class QueenTest {
      */
     @Ignore ("queenSetup() error: Invalid position")
     @Test
-    public void queenSetupTestFail() {
+    public void queenSetupTestFail() throws IllegalArgumentException {
         queenTestInvalid = new Queen(9,6, Color.WHITE);
     }
 
@@ -59,7 +59,7 @@ public class QueenTest {
      * based on its current position
      */
     @Test
-    public void canMoveTest() {
+    public void canMoveTest() throws IllegalArgumentException {
         // Move diagonally along SE-NW axis
         assertEquals(1, queenTest.canMove(5,2));
 
@@ -84,7 +84,7 @@ public class QueenTest {
      */
     @Ignore ("canMove() error: A piece cannot move to itself")
     @Test
-    public void canMoveInPlaceTestFail() {
+    public void canMoveInPlaceTestFail() throws IllegalArgumentException {
         assertEquals(1, queenTest.canMove(4,3));
     }
 
@@ -94,7 +94,7 @@ public class QueenTest {
      */
     @Ignore ("canMove() error: Out of bounds")
     @Test
-    public void canMoveOutOfBoundsTestFail() {
+    public void canMoveOutOfBoundsTestFail() throws IllegalArgumentException {
         assertEquals(1, queenTest.canMove(9,8));
     }
 
@@ -103,7 +103,7 @@ public class QueenTest {
      * another piece based on each piece's position
      */
     @Test
-    public void canKillTest() {
+    public void canKillTest() throws IllegalArgumentException {
         // Different color, wrong pos -> can't kill
         queenTestTarget = new Queen(5,0, Color.WHITE);
         assertEquals(0, queenTest.canKill(queenTestTarget));
@@ -126,7 +126,7 @@ public class QueenTest {
      */
     @Ignore ("canKill() error: Target Out of Bounds")
     @Test
-    public void canKillOutOfBoundsTestFail() {
+    public void canKillOutOfBoundsTestFail() throws IllegalArgumentException {
         queenTestTarget = new Queen(9,0, Color.WHITE);
         assertEquals(0, queenTest.canKill(queenTestTarget));
     }
@@ -137,7 +137,7 @@ public class QueenTest {
      */
     @Ignore ("canKill() error: Target cannot be at Self")
     @Test
-    public void canKillSelfTestFail() {
+    public void canKillSelfTestFail() throws IllegalArgumentException {
         queenTestTarget = new Queen(4,3, Color.WHITE);
         assertEquals(0, queenTest.canKill(queenTestTarget));
     }
