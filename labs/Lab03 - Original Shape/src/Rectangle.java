@@ -22,33 +22,53 @@ public class Rectangle implements Shape{
     }
 
     /**
-        FIELDS
-        ..this.x : double
-        ..this.y : double
-        ..this.width  : double
-        ..this.height : double
-      */
+     * Return the string representation of the Rectangle object
+     * FIELDS
+     *         ..this.x : double
+     *         ..this.y : double
+     *         ..this.width  : double
+     *         ..this.height : double
+     * @return the string representation of the Rectangle object
+     */
     public String toString() {
         return String.format("Rectangle: LL corner (%.3f,%.3f) width %.3f height " +
                 "%.3f",
             this.x,this.y,this.width,this.height);
     }
 
+    /**
+     * Calculate the distance of the lower left of the rectangle from the origin.
+     * @return the distance of the lower left of the rectangle from the origin.
+     */
     @Override
     public double distanceFromOrigin() {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     } // Repetitive
 
+    /**
+     * Calculate the area of the rectangle using the formula width * height
+     * @return the area of the rectangle
+     */
     @Override
     public double area() {
         return this.width * this.height;
     }
 
+    /**
+     * Calculate the perimeter of the rectangle using the formula (width + height) * 2
+     * @return the perimeter of the rectangle
+     */
     @Override
     public double perimeter() {
         return (this.width + this.height) * 2;
     }
 
+    /**
+     * Create and return a rectangle with the area resized by the provided factor.
+     * The anchor point of the new rectangle remains the same
+     * @param factor factor of resizing
+     * @return the resized Rectangle
+     */
     @Override
     public Shape resize(double factor) {
         double sqrtFactor = Math.sqrt(factor);
@@ -59,6 +79,15 @@ public class Rectangle implements Shape{
             sqrtFactor * this.height);
     }
 
+    /**
+     * Compares the area of this rectangle with that of the other shape
+     * passed into the function
+     *      * if (this<s) return a negative number
+     *      * if (this==s) return 0
+     *      * if (this>s) return a positive number
+     * @param s the other shape to be compared to
+     * @return
+     */
     @Override
     public int compareTo(Shape s) {
         double areaThis = this.area();
