@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+/**
+ * This class is used for testing purposes
+ */
 public class FractionImplTest {
 
     // Declare Fraction objects
