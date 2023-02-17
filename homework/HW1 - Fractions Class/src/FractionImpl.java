@@ -90,11 +90,22 @@ public class FractionImpl implements Fraction {
             denominator / gcd);
     }
 
+    /**
+     * Calculate the decimal value of the fraction
+     * @return the decimal value of the fraction
+     */
     @Override
     public double toDouble() {
         return (double)numerator / (double)denominator;
     }
 
+    /**
+     * Return the string representation of the reciprocal
+     * of the current fraction, whose numerator must not
+     * be 0
+     * @return the string representation of the reciprocal
+     * of the current fraction
+     */
     @Override
     public String reciprocal() {
         if (numerator == 0) {
@@ -104,6 +115,11 @@ public class FractionImpl implements Fraction {
         return String.format("%d / %d", denominator, numerator);
     }
 
+    /**
+     * Calculate the fractional value of the sum of two fractions
+     * @param other the other fraction to be added
+     * @return the sum of two fractions in fraction form
+     */
     @Override
     public String add(FractionImpl other) {
         return String.format("%d / %d",

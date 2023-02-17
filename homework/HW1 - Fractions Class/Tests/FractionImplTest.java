@@ -12,12 +12,12 @@ public class FractionImplTest {
 
     // Declare Fraction objects
 
-    public FractionImpl f0;
-    private FractionImpl f1;
-    private FractionImpl f2;
-    private FractionImpl f3;
-    private FractionImpl f4;
-    private FractionImpl f5;
+    public FractionImpl fractionTestFail;
+    private FractionImpl fractionTest;
+    private FractionImpl fractionReciprocalFail;
+    private FractionImpl fractionTest2;
+    private FractionImpl fractionTest3;
+    private FractionImpl fractionTest4;
 
 
     /** Create new objects for testing
@@ -25,11 +25,11 @@ public class FractionImplTest {
      */
     @Before
     public void fractionSetUp() throws Exception {
-        f1 = new FractionImpl(1,5);
-        f2 = new FractionImpl(0,2);
-        f3 = new FractionImpl(2,3);
-        f4 = new FractionImpl(1,8);
-        f5 = new FractionImpl(2,10);
+        fractionTest = new FractionImpl(1,5);
+        fractionReciprocalFail = new FractionImpl(0,2);
+        fractionTest2 = new FractionImpl(2,3);
+        fractionTest3 = new FractionImpl(1,8);
+        fractionTest4 = new FractionImpl(2,10);
     }
 
     /**
@@ -40,7 +40,7 @@ public class FractionImplTest {
         + " Denominator must be greater than 0")
     @Test
     public void createFractionTestFail() {
-        f0 = new FractionImpl(3,0);
+        fractionTestFail = new FractionImpl(3,0);
     }
 
     /**
@@ -49,7 +49,7 @@ public class FractionImplTest {
      */
     @Test
     public void getNumeratorTest() {
-        assertEquals(1, f1.getNumerator());
+        assertEquals(1, fractionTest.getNumerator());
     }
 
     /**
@@ -59,7 +59,7 @@ public class FractionImplTest {
      */
     @Test
     public void getDenominatorTest() throws Exception {
-        assertEquals(5, f1.getDenominator());
+        assertEquals(5, fractionTest.getDenominator());
     }
 
     /**
@@ -69,8 +69,8 @@ public class FractionImplTest {
      */
     @Test
     public void setNumeratorTest() {
-        f1.setNumerator(100);
-        assertEquals(100, f1.getNumerator());
+        fractionTest.setNumerator(100);
+        assertEquals(100, fractionTest.getNumerator());
     }
 
     /**
@@ -80,8 +80,8 @@ public class FractionImplTest {
      */
     @Test
     public void setDenominatorTest() {
-        f1.setDenominator(100);
-        assertEquals(100, f1.getDenominator());
+        fractionTest.setDenominator(100);
+        assertEquals(100, fractionTest.getDenominator());
     }
 
     /**
@@ -92,8 +92,8 @@ public class FractionImplTest {
         + "Denominator must be greater than 0")
     @Test
     public void setDenominatorTestFail() {
-        f1.setDenominator(-2);
-        assertEquals(-2, f1.getDenominator());
+        fractionTest.setDenominator(-2);
+        assertEquals(-2, fractionTest.getDenominator());
     }
 
     /**
@@ -102,7 +102,7 @@ public class FractionImplTest {
      */
     @Test
     public void toStringTest() {
-        assertEquals("1 / 5", f5.toString());
+        assertEquals("1 / 5", fractionTest4.toString());
     }
 
     /**
@@ -111,7 +111,7 @@ public class FractionImplTest {
      */
     @Test
     public void toDoubleTest() {
-        assertEquals(0.2, f1.toDouble(), 0.000001);
+        assertEquals(0.2, fractionTest.toDouble(), 0.000001);
     }
 
     /**
@@ -121,7 +121,7 @@ public class FractionImplTest {
      */
     @Test
     public void reciprocalTest() throws Exception {
-        assertEquals("5 / 1", f1.reciprocal());
+        assertEquals("5 / 1", fractionTest.reciprocal());
     }
 
     /**
@@ -133,7 +133,7 @@ public class FractionImplTest {
         + "Numerator must not be 0")
     @Test
     public void reciprocalTestFail() throws Exception {
-        f2.reciprocal();
+        fractionReciprocalFail.reciprocal();
     }
 
     /**
@@ -142,7 +142,7 @@ public class FractionImplTest {
      */
     @Test
     public void addTest() {
-        assertEquals("13 / 15", f1.add(f3));
+        assertEquals("13 / 15", fractionTest.add(fractionTest2));
     }
 
     /**
@@ -151,7 +151,7 @@ public class FractionImplTest {
      */
     @Test
     public void compareToTestLessThan() {
-        assertEquals(-1, f1.compareTo(f3));
+        assertEquals(-1, fractionTest.compareTo(fractionTest2));
     }
 
     /**
@@ -160,7 +160,7 @@ public class FractionImplTest {
      */
     @Test
     public void compareToTestEqual() {
-        assertEquals(0, f1.compareTo(f5));
+        assertEquals(0, fractionTest.compareTo(fractionTest4));
     }
 
     /**
@@ -169,6 +169,6 @@ public class FractionImplTest {
      */
     @Test
     public void compareToTestGreater() {
-        assertEquals(1, f1.compareTo(f4));
+        assertEquals(1, fractionTest.compareTo(fractionTest3));
     }
 }
