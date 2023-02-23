@@ -11,9 +11,16 @@ import static org.junit.Assert.*;
  * This class contains all the unit tests for various kinds of shapes
  */
 public class ShapeTest {
+
+    /**
+     * Initialize the test objects
+     */
     Shape circle1,circle2,circle3,rect1,rect2,tri1, triCollinear;
     PerimComparator comparison;
 
+    /**
+     * Set up testing by giving test objects values
+     */
     @Before
     public void setup() {
         circle1 = new Circle(3,4,5);
@@ -24,6 +31,7 @@ public class ShapeTest {
         tri1 = new Triangle(6,9,4,7,2,2);
         comparison = new PerimComparator();
     }
+
     /**
      * Tests whether objects have been created with the correct numbers or not.
      * It does this by using their toString methods
@@ -71,6 +79,9 @@ public class ShapeTest {
         assertEquals(16.275,tri1.perimeter(), 0.001);
     }
 
+    /**
+     * Tests whether the resize methods resize correctly for all shapes
+     */
     @Test
     public void testResizes() {
         Shape resizedCircle1,resizedCircle2,resizedCircle3,resizedRect1,
@@ -91,11 +102,19 @@ public class ShapeTest {
         assertEquals(2*tri1.area(), resizedTri1.area(), 0.001);
     }
 
+    /**
+     * Test if the Comparator class works correctly when it comes to
+     * comparing perimeters
+     */
     @Test
     public void comparePerim() {
         assertEquals(-1, comparison.compare(rect1, tri1));
     }
 
+    /**
+     * Test if the isCollinearTest() method correctly returns an area of 0
+     * on a triangle with 3 vertices on the same line
+     */
     @Test
     public void isCollinearTest() {
         triCollinear = new Triangle(7,6,4,5,13,8);
