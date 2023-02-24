@@ -188,6 +188,16 @@ public class Pawn extends ChessObject implements ChessPiece{
     @Override
     public int canKill(ChessPiece piece) {
 
+        if ((piece.getRow() < 0 || piece.getRow() > 7) ||
+            (piece.getColumn() < 0 || piece.getColumn() > 7)) {
+            throw new IllegalArgumentException();
+        }
+
+        // A piece cannot kill at current position
+        if ((this.row == piece.getRow()) && (this.col == piece.getColumn())) {
+            throw new IllegalArgumentException();
+        }
+
         int rowDiffKill = piece.getRow() - this.row;
         int colDiffKill = piece.getColumn() - this.col;
 
@@ -228,6 +238,17 @@ public class Pawn extends ChessObject implements ChessPiece{
      */
     @Override
     public int canKillV2(Board board, ChessPiece piece) {
+        // Check if the targets are within bounds
+        if ((piece.getRow() < 0 || piece.getRow() > 7) ||
+            (piece.getColumn() < 0 || piece.getColumn() > 7)) {
+            throw new IllegalArgumentException();
+        }
+
+        // A piece cannot kill at current position
+        if ((this.row == piece.getRow()) && (this.col == piece.getColumn())) {
+            throw new IllegalArgumentException();
+        }
+
         int rowDiffKill = piece.getRow() - this.row;
         int colDiffKill = piece.getColumn() - this.col;
 

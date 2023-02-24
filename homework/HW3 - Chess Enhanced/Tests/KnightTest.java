@@ -7,6 +7,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+/**
+ * This class contains all tests for the Knight class
+ */
 public class KnightTest {
     private Knight knightTest;
     private Knight knightTestInvalid;
@@ -24,18 +27,26 @@ public class KnightTest {
      * Set up error: Chess piece at invalid position
      * (out of bounds)
      */
-    @Ignore ("knightSetup() error: Invalid position")
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void knightSetupTestFail() throws IllegalArgumentException {
         knightTestInvalid = new Knight(8,6, Color.WHITE);
     }
 
     /**
-     * Test if the piece has the correct color
+     * Test if the piece has the correct color Black
      */
     @Test
-    public void getColorTest() {
+    public void getColorBlackTest() {
         assertEquals("Black", knightTest.getColor());
+    }
+
+    /**
+     * Test if the piece has the correct color White
+     */
+    @Test
+    public void getColorWhiteTest() {
+        knightTest = new Knight(4,5, Color.WHITE);
+        assertEquals("White", knightTest.getColor());
     }
 
     /**
@@ -78,8 +89,7 @@ public class KnightTest {
      * The test should throw an error if a chess piece
      * want to move to its current position
      */
-    @Ignore ("canMove() error: A piece cannot move to itself")
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void canMoveInPlaceTestFail() throws IllegalArgumentException {
         assertEquals(1, knightTest.canMove(4,5));
     }
@@ -88,8 +98,7 @@ public class KnightTest {
      * The test should throw an error if a chess piece
      * want to move out of the bounds of the board
      */
-    @Ignore ("canMove() error: Out of bounds")
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void canMoveOutOfBoundsTestFail() throws IllegalArgumentException {
         assertEquals(1, knightTest.canMove(0,8));
     }
@@ -100,13 +109,6 @@ public class KnightTest {
      */
     @Test
     public void canKillTest() throws IllegalArgumentException {
-        // Different color, wrong pos -> can't kill
-        knightTestTarget = new Knight(5,0, Color.WHITE);
-        assertEquals(0, knightTest.canKill(knightTestTarget));
-
-        // Same color, valid pos -> can't kill
-        knightTestTarget = new Knight(2,5, Color.BLACK);
-        assertEquals(0, knightTest.canKill(knightTestTarget));
 
         // Different color, valid pos -> can kill
         knightTestTarget = new Knight(5,7, Color.WHITE);
@@ -117,11 +119,25 @@ public class KnightTest {
     }
 
     /**
+     * Test if the current chess piece cannot kill
+     * another piece based on each piece's position
+     */
+    @Test
+    public void cannotKillTest() throws IllegalArgumentException {
+        // Different color, wrong pos -> can't kill
+        knightTestTarget = new Knight(5, 0, Color.WHITE);
+        assertEquals(0, knightTest.canKill(knightTestTarget));
+
+        // Same color, valid pos -> can't kill
+        knightTestTarget = new Knight(2, 5, Color.BLACK);
+        assertEquals(0, knightTest.canKill(knightTestTarget));
+    }
+
+    /**
      * The function should throw an error if the target
      * is out of bounds
      */
-    @Ignore ("canKill() error: Target Out of Bounds")
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void canKillOutOfBoundsTestFail() throws IllegalArgumentException {
         knightTestTarget = new Knight(9,0, Color.WHITE);
         assertEquals(0, knightTest.canKill(knightTestTarget));
@@ -131,8 +147,7 @@ public class KnightTest {
      * The function should throw an error if the target
      * is in its current position (not possible)
      */
-    @Ignore ("canKill() error: Target cannot be at Self")
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void canKillSelfTestFail() throws IllegalArgumentException {
         knightTestTarget = new Knight(4,5, Color.WHITE);
         assertEquals(0, knightTest.canKill(knightTestTarget));

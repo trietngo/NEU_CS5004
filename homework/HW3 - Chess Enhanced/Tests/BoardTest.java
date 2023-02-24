@@ -84,9 +84,16 @@ public class BoardTest {
     }
 
     /**
+     * This test makes sure the empty tiles return null
+     */
+    @Test
+    public void getPieceEmptyPositionTest() {
+        assertSame(null, activeChessBoard.getPiece(5,0));
+    }
+
+    /**
      * This test makes sure that getPiece() expects an error
      */
-    @Ignore ("getPiece(): Selected coordinates out of bounds.")
     @Test (expected = IllegalArgumentException.class)
     public void getPiecePositionFail() throws Exception {
         assertSame(knightBlack1, activeChessBoard.getPiece(7,9));
@@ -96,7 +103,6 @@ public class BoardTest {
      * This test attempts to place a chess piece onto an occupied tile
      * which will throw an error
      */
-    @Ignore ("setPiece(): Coordinates occupied.")
     @Test (expected = IllegalArgumentException.class)
     public void setPieceOccupiedTestFail() throws Exception {
         queenTest = (Queen) activeChessBoard.setPiece(new Queen(Color.BLACK), 6,7);
@@ -104,10 +110,9 @@ public class BoardTest {
 
     /**
      * This test attempts to place a chess piece outside the board's
-     * limit
+     * limit, which will throw an IndexOutOfBoundsException exception
      */
-    @Ignore ("setPiece(): Selected coordinates out of bounds.")
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = IndexOutOfBoundsException.class)
     public void setPieceOutOfBoundsTestFail() throws Exception {
         queenTest = (Queen) activeChessBoard.setPiece(new Queen(Color.BLACK), 10,0);
     }
@@ -133,7 +138,6 @@ public class BoardTest {
     /**
      * This test attempts to move a King piece outside the board's limit
      */
-    @Ignore ("canMoveV2(): Selected coordinates out of bounds.")
     @Test (expected = IllegalArgumentException.class)
     public void kingCanMoveV2OutOfBoundsTestFail() throws Exception {
         assertEquals(0, kingWhite.canMoveV2(activeChessBoard, 9, 3));
@@ -142,7 +146,6 @@ public class BoardTest {
     /**
      * This test attempts to move a King piece onto itself
      */
-    @Ignore ("canMoveV2(): Cannot move to itself.")
     @Test (expected = IllegalArgumentException.class)
     public void kingCanMoveV2InPlaceTestFail() throws Exception {
         assertEquals(0, kingWhite.canMoveV2(activeChessBoard, kingWhite.getRow(),
@@ -183,7 +186,6 @@ public class BoardTest {
     /**
      * This test attempts to move a Queen piece outside the board's limit
      */
-    @Ignore ("canMoveV2(): Selected coordinates out of bounds.")
     @Test (expected = IllegalArgumentException.class)
     public void queenCanMoveV2OutOfBoundsTestFail() throws Exception {
         assertEquals(0, queenBlack.canMoveV2(activeChessBoard, 9, 3));
@@ -192,7 +194,6 @@ public class BoardTest {
     /**
      * This test attempts to move a Queen piece onto itself
      */
-    @Ignore ("canMoveV2(): Cannot move to itself.")
     @Test (expected = IllegalArgumentException.class)
     public void queenCanMoveV2InPlaceTestFail() throws Exception {
         assertEquals(0, queenBlack.canMoveV2(activeChessBoard, queenBlack.getRow(),
@@ -220,7 +221,6 @@ public class BoardTest {
     /**
      * This test attempts to move a Rook piece outside the board's limit
      */
-    @Ignore ("canMoveV2(): Selected coordinates out of bounds.")
     @Test (expected = IllegalArgumentException.class)
     public void rookCanMoveV2OutOfBoundsTestFail() throws Exception {
         assertEquals(0, rookBlack.canMoveV2(activeChessBoard, 9, 3));
@@ -229,7 +229,6 @@ public class BoardTest {
     /**
      * This test attempts to move a Rook piece onto itself
      */
-    @Ignore ("canMoveV2(): Cannot move to itself.")
     @Test (expected = IllegalArgumentException.class)
     public void rookCanMoveV2InPlaceTestFail() throws Exception {
         assertEquals(0, rookWhite.canMoveV2(activeChessBoard, rookWhite.getRow(),
@@ -263,7 +262,6 @@ public class BoardTest {
     /**
      * This test attempts to move a Bishop piece outside the board's limit
      */
-    @Ignore ("canMoveV2(): Selected coordinates out of bounds.")
     @Test (expected = IllegalArgumentException.class)
     public void bishopCanMoveV2OutOfBoundsTestFail() throws Exception {
         assertEquals(0, bishopWhite.canMoveV2(activeChessBoard, 9, 3));
@@ -272,7 +270,6 @@ public class BoardTest {
     /**
      * This test attempts to move a Bishop piece onto itself
      */
-    @Ignore ("canMoveV2(): Cannot move to itself.")
     @Test (expected = IllegalArgumentException.class)
     public void bishopCanMoveV2InPlaceTestFail() throws Exception {
         assertEquals(0, bishopBlack.canMoveV2(activeChessBoard, bishopBlack.getRow(),
@@ -303,7 +300,6 @@ public class BoardTest {
     /**
      * This test attempts to move a Knight piece outside the board's limit
      */
-    @Ignore ("canMoveV2(): Selected coordinates out of bounds.")
     @Test (expected = IllegalArgumentException.class)
     public void knightCanMoveV2OutOfBoundsTestFail() throws Exception {
         assertEquals(0, knightWhite1.canMoveV2(activeChessBoard, 9, 3));
@@ -312,7 +308,6 @@ public class BoardTest {
     /**
      * This test attempts to move a Knight piece onto itself
      */
-    @Ignore ("canMoveV2(): Cannot move to itself.")
     @Test (expected = IllegalArgumentException.class)
     public void knightCanMoveV2InPlaceTestFail() throws Exception {
         assertEquals(0, knightBlack2.canMoveV2(activeChessBoard, knightBlack2.getRow(),
@@ -336,7 +331,6 @@ public class BoardTest {
     /**
      * This test attempts to move a Pawn piece outside the board's limit
      */
-    @Ignore ("canMoveV2(): Selected coordinates out of bounds.")
     @Test (expected = IllegalArgumentException.class)
     public void pawnCanMoveV2OutOfBoundsTestFail() throws Exception {
         assertEquals(0, pawnBlack1.canMoveV2(activeChessBoard, 9, 3));
@@ -345,7 +339,6 @@ public class BoardTest {
     /**
      * This test attempts to move a Pawn piece onto itself
      */
-    @Ignore ("canMoveV2(): Cannot move to itself.")
     @Test (expected = IllegalArgumentException.class)
     public void pawnCanMoveV2InPlaceTestFail() throws Exception {
         assertEquals(0, pawnWhite2.canMoveV2(activeChessBoard, pawnWhite2.getRow(),
@@ -368,6 +361,14 @@ public class BoardTest {
     }
 
     /**
+     * A Queen piece attempts to kill at its current pos
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void kingCanKillV2SelfTestFail() throws Exception {
+        assertEquals(0, kingWhite.canKillV2(activeChessBoard, kingWhite));
+    }
+
+    /**
      * This tests whether existing Queen pieces can kill a piece at a specific tile
      */
     @Test
@@ -382,7 +383,6 @@ public class BoardTest {
     /**
      * A Queen piece attempts to kill at its current pos
      */
-    @Ignore ("canKillV2(): Cannot kill at current pos.")
     @Test (expected = IllegalArgumentException.class)
     public void queenCanKillV2SelfTestFail() throws Exception {
         assertEquals(0, queenBlack.canKillV2(activeChessBoard, queenBlack));
@@ -404,7 +404,6 @@ public class BoardTest {
     /**
      * A Rook piece attempts to kill at its current pos
      */
-    @Ignore ("canKillV2(): Cannot kill at current pos.")
     @Test (expected = IllegalArgumentException.class)
     public void rookCanKillV2SelfTestFail() throws Exception {
         assertEquals(0, rookWhite.canKillV2(activeChessBoard, rookWhite));
@@ -433,7 +432,6 @@ public class BoardTest {
     /**
      * A Bishop piece attempts to kill at its current pos
      */
-    @Ignore ("canKillV2(): Cannot kill at current pos.")
     @Test (expected = IllegalArgumentException.class)
     public void bishopCanKillV2SelfTestFail() throws Exception {
         assertEquals(0, bishopBlack.canKillV2(activeChessBoard, bishopBlack));
@@ -462,7 +460,6 @@ public class BoardTest {
     /**
      * A Knight piece attempts to kill at its current pos
      */
-    @Ignore ("canKillV2(): Cannot kill at current pos.")
     @Test (expected = IllegalArgumentException.class)
     public void knightCanKillV2SelfTestFail() throws Exception {
         assertEquals(0, knightWhite2.canKillV2(activeChessBoard, knightWhite2));
@@ -482,5 +479,13 @@ public class BoardTest {
 
         queenTest = (Queen) activeChessBoard.setPiece(new Queen(Color.WHITE), 5, 6);
         assertEquals(1, pawnBlack1.canKillV2(activeChessBoard, queenTest));
+    }
+
+    /**
+     * A Pawn piece attempts to kill at its current pos
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void pawnCanKillV2SelfTestFail() throws Exception {
+        assertEquals(0, pawnBlack1.canKillV2(activeChessBoard, pawnBlack1));
     }
 }
