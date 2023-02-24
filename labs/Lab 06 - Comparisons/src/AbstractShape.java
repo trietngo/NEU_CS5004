@@ -46,7 +46,7 @@ public abstract class AbstractShape implements Shape {
 
 /* Question 3 Answer:
 * If the ordering of shapes is based on perimeter,
-* lines 15, 16, 17, and 19 in AbstractShape.java
+* lines 35, 36, 37, and 39 in AbstractShape.java
 * would have to be modified.
 *
 * If it were not for sharing code, 3 files would have

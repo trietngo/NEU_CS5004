@@ -24,7 +24,7 @@ public class Triangle extends AbstractShape {
             this.vertex1 = new Point2D(x1, y1);
             this.vertex2 = new Point2D(x2, y2);
         } else {
-            throw new IllegalArgumentException("Points aren't unique");
+            throw new IllegalArgumentException("Points aren't unique.");
         }
     }
 
@@ -103,11 +103,15 @@ public class Triangle extends AbstractShape {
     }
 
     /**
-     * Calculate the perimeter of a triangle
-     * @return the perimeter of a triangle
+     * Calculate the perimeter of a triangle. If the triangle is degenerate,
+     * meaning its vertices are collinear, then return 0.
+     * @return the perimeter of a triangle, 0 if the vertices are collinear.
      */
     public double perimeter() {
-        return this.triangleSideA() + this.triangleSideB() + this.triangleSideC();
+        if (!isCollinear()) {
+            return this.triangleSideA() + this.triangleSideB() + this.triangleSideC();
+        }
+        return 0;
     }
 
     /**
@@ -117,20 +121,24 @@ public class Triangle extends AbstractShape {
      * @return a new Triangle object that is the resized version of the original Shape
      */
     public Shape resize(double factor) {
-        double sqrtFactor = Math.sqrt(factor);
 
-        double resizedX1 = this.reference.getX() - (this.reference.getX()
-            - this.vertex1.getX()) * sqrtFactor;
-        double resizedY1 = this.reference.getY() - (this.reference.getY()
-            - this.vertex1.getY()) * sqrtFactor;
+        if (factor > 0) {
+            double sqrtFactor = Math.sqrt(factor);
 
-        double resizedX2 = this.reference.getX() - (this.reference.getX()
-            - this.vertex2.getX()) * sqrtFactor;
-        double resizedY2 = this.reference.getY() - (this.reference.getY()
-            - this.vertex2.getY()) * sqrtFactor;
+            double resizedX1 = this.reference.getX() - (this.reference.getX()
+                - this.vertex1.getX()) * sqrtFactor;
+            double resizedY1 = this.reference.getY() - (this.reference.getY()
+                - this.vertex1.getY()) * sqrtFactor;
 
-        return new Triangle(this.reference.getX(), this.reference.getY(),
-            resizedX1, resizedY1, resizedX2, resizedY2);
+            double resizedX2 = this.reference.getX() - (this.reference.getX()
+                - this.vertex2.getX()) * sqrtFactor;
+            double resizedY2 = this.reference.getY() - (this.reference.getY()
+                - this.vertex2.getY()) * sqrtFactor;
+
+            return new Triangle(this.reference.getX(), this.reference.getY(),
+                resizedX1, resizedY1, resizedX2, resizedY2);
+        }
+        throw new IllegalArgumentException("Resizing factor cannot be 0 or less");
     }
 
     /**
@@ -142,10 +150,53 @@ public class Triangle extends AbstractShape {
      * @return the string representation of the Triangle object
      */
     public String toString() {
-        return String.format("Triangle: Reference vertex (%.3f,%.3f), vertex 1 (%.3f,%.3f), "
-                + "vertex 2 (%.3f,%.3f)",
-            this.reference.getX(), this.reference.getY(),
-            this.vertex1.getX(), this.vertex1.getY(),
-            this.vertex2.getX(), this.vertex2.getY());
+        if (!isCollinear()) {
+            return String.format("Triangle: Reference vertex (%.3f,%.3f), vertex 1 (%.3f,%.3f), "
+                    + "vertex 2 (%.3f,%.3f)",
+                this.reference.getX(), this.reference.getY(),
+                this.vertex1.getX(), this.vertex1.getY(),
+                this.vertex2.getX(), this.vertex2.getY());
+        }
+        return "Triangle is degenerate: All vertices are on the same line.";
+    }
+
+    /**
+     * Return the coordinates of Vertex 1
+     * @return a Point2D object representing the coordinates of Vertex 1
+     */
+    public Point2D getVertex1() {
+        return this.vertex1;
+    }
+
+    /**
+     * Set new values for the coordinate of Vertex 1
+     * @throws IllegalArgumentException if the updated vertex is not unique
+     */
+    public void setVertex1(Point2D vertex1) {
+        if ((vertex1.getX() == vertex2.getX() && vertex1.getY() == vertex2.getY()) ||
+            (vertex1.getX() == reference.getX() && vertex1.getY() == reference.getY())) {
+            throw new IllegalArgumentException("Vertices are no longer unique.");
+        }
+        this.vertex1 = vertex1;
+    }
+
+    /**
+     * Return the coordinates of Vertex 2
+     * @return a Point2D object representing the coordinates of Vertex 2
+     */
+    public Point2D getVertex2() {
+        return this.vertex2;
+    }
+
+    /**
+     * Set new values for the coordinate of Vertex 2
+     * @throws IllegalArgumentException if the updated vertex is not unique
+     */
+    public void setVertex2(Point2D vertex2) {
+        if ((vertex2.getX() == vertex1.getX() && vertex2.getY() == vertex1.getY()) ||
+            (vertex2.getX() == reference.getX() && vertex2.getY() == reference.getY())) {
+            throw new IllegalArgumentException("Vertices are no longer unique.");
+        }
+        this.vertex2 = vertex2;
     }
 }

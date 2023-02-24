@@ -20,8 +20,8 @@ public class PerimComparator implements Comparator {
      * @param origin the current Shape Object
      * @param target the target Shape Object
      * if (origin<target) return -1
-     * if (origin<target) return 0
-     * if (origin<target) return 1
+     * if (origin=target) return 0
+     * if (origin>target) return 1
      * @return comparison result.
      */
     public int compare(Object origin, Object target) {
